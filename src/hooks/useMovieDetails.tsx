@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import movieDB from '../api/movieDB';
+import restaurantDB from '../api/restaurantDB';
 import { MovieFull } from '../interfaces/movieInterface';
 import { Cast, CreditsResponse } from '../interfaces/creditsInterface';
 
@@ -19,8 +19,8 @@ export const useMovieDetails = (movieId: number) => {
 
     const getMovieDetails = async() => {
 
-        const movieDetailsPromise = await movieDB.get<MovieFull>(`/${movieId}`);
-        const castPromise = await movieDB.get<CreditsResponse>(`/${movieId}/credits`);
+        const movieDetailsPromise = await restaurantDB.get<MovieFull>(`/${movieId}`);
+        const castPromise = await restaurantDB.get<CreditsResponse>(`/${movieId}/credits`);
         
         const [ movieDetailsResp, castPromiseResp ] = await Promise.all([movieDetailsPromise,castPromise]);
 

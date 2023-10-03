@@ -99,9 +99,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.peliculasapp"
+    namespace "com.restaurantsapp"
     defaultConfig {
-        applicationId "com.peliculasapp"
+        applicationId "com.restaurantsapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

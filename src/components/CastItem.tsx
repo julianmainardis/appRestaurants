@@ -8,7 +8,7 @@ interface Props {
 
 export const CastItem = ({actor}: Props) => {
 
-    const uri = `https://image.tmdb.org/t/p/w500${actor.profile_path}`;
+    const uri = `https://picsum.photos/200/300`;
 
     return (
         <View style={styles.container}>

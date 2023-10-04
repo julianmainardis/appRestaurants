@@ -12,7 +12,7 @@ import { getImageColors } from '../helpers/getColors';
 import { GradientContext } from '../context/GradientContext';
 import { useEffect } from 'react';
 
-const {width: windowWitdth} =Dimensions.get('window');
+const {width: windowWitdth, height: windowHeight} =Dimensions.get('window');
 
 export const HomeScreen = () => {
     
@@ -45,22 +45,25 @@ export const HomeScreen = () => {
 
     return (
         <GradientBackground>
-            <ScrollView>
-                <View style={{marginTop: top + 20}}>
-                    <View style={{height: 440}}>
+            <ScrollView contentContainerStyle={{ flex: 1, marginTop: top + 20 }}>
+                {/* <View style={{marginTop: 20}}>
+                    <View style={{height: 440}}> */}
                         <Carousel
                             data={nowPlaying}
                             renderItem={ ({item}: any) => <MoviePoster movie={item}/>}
                             sliderWidth={windowWitdth}
+                            sliderHeight={windowHeight}
                             itemWidth={300}
+                            itemHeight={110}
                             inactiveSlideOpacity={0.9}
+                            vertical={true}
                             onSnapToItem={index => getPosterColors(index)}
                         />
-                    </View>
-                    <HorizontalSlider title='Popular' movies={popular}/>
+                    {/* </View> */}
+                    {/* <HorizontalSlider title='Popular' movies={popular}/>
                     <HorizontalSlider title='Top Rated' movies={topRated}/>
-                    <HorizontalSlider title='Upcoming' movies={upcoming}/>
-                </View>
+                    <HorizontalSlider title='Upcoming' movies={upcoming}/> */}
+                {/* </View> */}
             </ScrollView>
         </GradientBackground>
     )

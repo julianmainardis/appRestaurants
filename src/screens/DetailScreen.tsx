@@ -14,7 +14,7 @@ interface Props extends StackScreenProps<RootStackParams, 'DetailScreen'>{};
 export const DetailScreen = ({route, navigation}: Props) => {
     
     const movie = route.params;
-    const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+    const uri = `https://picsum.photos/200/300`;
 
     const { isLoading, cast, movieFull } = useMovieDetails(movie.id);
     
@@ -30,7 +30,7 @@ export const DetailScreen = ({route, navigation}: Props) => {
             </View>
 
             <View style={styles.marginContainer}>
-                <Text style={styles.subTitle}>{movie.original_title}</Text>
+                {/* <Text style={styles.subTitle}>{movie.original_title}</Text> */}
                 <Text style={styles.title}>{movie.title}</Text>
             </View>
             {
@@ -55,8 +55,8 @@ export const DetailScreen = ({route, navigation}: Props) => {
 
 const styles = StyleSheet.create({
     imageContainer: {
-        width: '100%',
-        height: screenHeight * 0.7,
+        width: '70%',
+        height: screenHeight * 0.3,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -64,13 +64,14 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.24,
         shadowRadius: 7,
+        alignSelf: 'center',
+        marginTop: 30,
         elevation: 9,
     },
     imageBorder: {
         flex: 1,
         overflow: 'hidden',
-        borderBottomEndRadius: 25,
-        borderBottomStartRadius: 25,
+        borderRadius: 25
     },
     posterImage: {
         flex: 1,

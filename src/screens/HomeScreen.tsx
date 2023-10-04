@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { ActivityIndicator, View, ScrollView } from 'react-native'
+import { ActivityIndicator, View, ScrollView, Text } from 'react-native'
 import { useMovies } from '../hooks/useMovies';
 import ImageColors from 'react-native-image-colors';
 import Carousel from 'react-native-snap-carousel';
@@ -11,6 +11,7 @@ import { GradientBackground } from '../components/GradientBackground';
 import { getImageColors } from '../helpers/getColors';
 import { GradientContext } from '../context/GradientContext';
 import { useEffect } from 'react';
+import { FlatList } from 'react-native-gesture-handler';
 
 const {width: windowWitdth, height: windowHeight} =Dimensions.get('window');
 
@@ -45,26 +46,30 @@ export const HomeScreen = () => {
 
     return (
         <GradientBackground>
-            <ScrollView contentContainerStyle={{ flex: 1, marginTop: top + 20 }}>
-                {/* <View style={{marginTop: 20}}>
-                    <View style={{height: 440}}> */}
-                        <Carousel
-                            data={nowPlaying}
-                            renderItem={ ({item}: any) => <MoviePoster movie={item}/>}
-                            sliderWidth={windowWitdth}
-                            sliderHeight={windowHeight}
-                            itemWidth={300}
-                            itemHeight={110}
-                            inactiveSlideOpacity={0.9}
-                            vertical={true}
-                            onSnapToItem={index => getPosterColors(index)}
-                        />
-                    {/* </View> */}
-                    {/* <HorizontalSlider title='Popular' movies={popular}/>
-                    <HorizontalSlider title='Top Rated' movies={topRated}/>
-                    <HorizontalSlider title='Upcoming' movies={upcoming}/> */}
-                {/* </View> */}
-            </ScrollView>
+            <View style={{alignItems: 'center', marginTop: 20}}>
+                <Text style={{fontSize: 30, color: 'white'}}>Productos</Text>
+            </View>
+            {/* <ScrollView contentContainerStyle={{ flex: 1, marginTop: 15 }}>
+                <Carousel
+                    data={nowPlaying}
+                    renderItem={ ({item}: any) => <MoviePoster movie={item}/>}
+                    sliderWidth={windowWitdth}
+                    sliderHeight={windowHeight}
+                    itemWidth={300}
+                    itemHeight={110}
+                    inactiveSlideOpacity={0.9}
+                    vertical={true}
+                    onSnapToItem={index => getPosterColors(index)}
+                /> */}
+                <FlatList
+                    data={nowPlaying}
+                    style={{marginVertical: 20}}
+                    renderItem={ ({item}: any) => <MoviePoster movie={item}/>}
+                />
+                {/* <HorizontalSlider title='Popular' movies={popular}/>
+                <HorizontalSlider title='Top Rated' movies={topRated}/>
+                <HorizontalSlider title='Upcoming' movies={upcoming}/> */}
+            {/* </ScrollView> */}
         </GradientBackground>
     )
 }

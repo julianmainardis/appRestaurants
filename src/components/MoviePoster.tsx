@@ -38,7 +38,7 @@ export const MoviePoster = ({movie, height = 120}: Props) => {
                         <Text style={{fontSize: 18, fontWeight: 'bold'}}>{movie.original_title}</Text>
                         <Text numberOfLines={2} ellipsizeMode="tail" style={{opacity: 0.7}}>{movie.overview}</Text>
                         <View style={{alignItems: 'flex-end', marginTop: 10, marginRight: 5}}>
-                            <Text>${movie.id}</Text>
+                            <Text>$ {movie.id}</Text>
                         </View>
                     </View>
                 </View>
@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
             height: 10,
         },
         shadowOpacity: 0.24,
-        shadowRadius: 7,
-        elevation: 9,
+        shadowRadius: 23,
+        elevation: 3,
     },
     image: {
         width: 70,

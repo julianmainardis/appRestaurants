@@ -49,27 +49,15 @@ export const HomeScreen = () => {
             <View style={{alignItems: 'center', marginTop: 20}}>
                 <Text style={{fontSize: 30, color: 'white'}}>Productos</Text>
             </View>
-            {/* <ScrollView contentContainerStyle={{ flex: 1, marginTop: 15 }}>
-                <Carousel
-                    data={nowPlaying}
-                    renderItem={ ({item}: any) => <MoviePoster movie={item}/>}
-                    sliderWidth={windowWitdth}
-                    sliderHeight={windowHeight}
-                    itemWidth={300}
-                    itemHeight={110}
-                    inactiveSlideOpacity={0.9}
-                    vertical={true}
-                    onSnapToItem={index => getPosterColors(index)}
-                /> */}
-                <FlatList
-                    data={nowPlaying}
-                    style={{marginVertical: 20}}
-                    renderItem={ ({item}: any) => <MoviePoster movie={item}/>}
-                />
-                {/* <HorizontalSlider title='Popular' movies={popular}/>
-                <HorizontalSlider title='Top Rated' movies={topRated}/>
-                <HorizontalSlider title='Upcoming' movies={upcoming}/> */}
-            {/* </ScrollView> */}
+
+            <FlatList
+                data={topRated}
+                style={{marginVertical: 20}}
+                renderItem={ ({item}: any) => <MoviePoster movie={item}/>}
+            />
+            {/* <HorizontalSlider title='Popular' movies={popular}/>
+            <HorizontalSlider title='Top Rated' movies={topRated}/>
+            <HorizontalSlider title='Upcoming' movies={upcoming}/> */}
         </GradientBackground>
     )
 }

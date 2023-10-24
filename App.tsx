@@ -2,22 +2,12 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { Navigation } from './src/navigation/Navigation';
-import { GradientProvider } from './src/context/GradientContext';
-
-const AppState = ({children}: any) => {
-    return (
-        <GradientProvider>
-            {children}
-        </GradientProvider>
-    )
-}
+import { View } from 'react-native';
 
 const App = () => {
     return (
         <NavigationContainer>
-            <AppState>
-                <Navigation/>
-            </AppState>
+            <Navigation/>
         </NavigationContainer>
     )
 }

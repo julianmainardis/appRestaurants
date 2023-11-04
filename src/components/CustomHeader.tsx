@@ -2,6 +2,7 @@ import React from 'react';
 import {
    Dimensions,
    Platform,
+   View,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Header, Text } from 'react-native-elements';
@@ -43,27 +44,30 @@ const CustomHeader = ({
    );
 
    return (
-      <Header
-         barStyle="dark-content"
-         leftComponent={leftComponent}
-         centerComponent={centerAux}
-         rightComponent={rightComponent}
-         containerStyle={{
-            height: headerHeight,
-            backgroundColor: '#282828',
-         }}
-         leftContainerStyle={{
-            marginLeft: -4,
-            marginTop: 5,
-         }}
-         rightContainerStyle={{
-            marginRight: -4,
-            marginTop: 5,
-         }}
-         centerContainerStyle={{
-            justifyContent: 'center',
-         }}
-      />
+      <>
+         <Header
+            barStyle="dark-content"
+            leftComponent={leftComponent}
+            centerComponent={centerAux}
+            rightComponent={rightComponent}
+            containerStyle={{
+               height: headerHeight,
+               backgroundColor: '#282828',
+            }}
+            leftContainerStyle={{
+               marginLeft: -4,
+               marginTop: 5,
+            }}
+            rightContainerStyle={{
+               marginRight: -4,
+               marginTop: 5,
+            }}
+            centerContainerStyle={{
+               justifyContent: 'center',
+            }}
+         />
+         <View style={{borderBottomWidth: 4, borderBottomColor: '#E3E3E3'}}/>
+      </>
    );
 };
 

@@ -56,31 +56,8 @@ export const MovieDetails = ({movieFull, cast}: Props) => {
                     showsHorizontalScrollIndicator={false}
                     style={{marginTop: 10, height: 70}}
                 />
-                <View style={{width: 200, height: 100, alignSelf: 'center'}}>
-                    <TouchableOpacity activeOpacity={0.7}>
-                        <View style={styles.buttonContainer}>
-                            <Text style={{fontSize: 20, fontWeight: 'bold', marginVertical: 5}}>Agregar al pedido</Text>
-                        </View>
-                    </TouchableOpacity>
-                </View>
+                
             </View>
         </>
     )
 }
-
-const styles = StyleSheet.create({
-    buttonContainer: {
-        alignItems: 'center',
-        marginTop: 20,
-        backgroundColor: 'white',
-        borderRadius: 30,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 10,
-        },
-        shadowOpacity: 0.24,
-        shadowRadius: 23,
-        elevation: 3,
-    }
-});

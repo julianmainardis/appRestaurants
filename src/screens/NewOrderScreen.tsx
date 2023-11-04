@@ -1,13 +1,13 @@
 import { StackScreenProps } from '@react-navigation/stack'
 import React from 'react'
 import { Image, StyleSheet, Text, View, Dimensions, ActivityIndicator, TouchableOpacity } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import { RootStackParams } from '../navigation/Navigation';
-import { useMovieDetails } from '../hooks/useMovieDetails';
-import { MovieDetails } from '../components/MovieDetails';
-import Icon from 'react-native-vector-icons/Ionicons';
 import CustomText from '../components/CustomText';
 import CustomHeader from '../components/CustomHeader';
+import { NewOrderCard } from '../components/NewOrderCard';
+import { useMovies } from '../hooks/useMovies';
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 
 const screenHeight = Dimensions.get('screen').height;
 
@@ -15,7 +15,7 @@ interface Props extends StackScreenProps<RootStackParams, 'NewOrderScreen'>{};
 
 export const NewOrderScreen = ({route, navigation}: Props) => {
     
-    const movie = route.params;
+    const { topRated } = useMovies();
 
     const leftAux = (
         <TouchableOpacity
@@ -31,26 +31,20 @@ export const NewOrderScreen = ({route, navigation}: Props) => {
               navigation.goBack();
            }}
         >
-           <Text>boton</Text>
+           {/* <FontAwesome5Icon name="chevron-left" color={'#A3A2A2'} size={26}/> */}
+           <Text style={{color:'#A3A2A2'}}>back</Text>
         </TouchableOpacity>
      );
     
     return (
-        <View style={{flex: 1}}>
+        <View style={{flex: 1, backgroundColor: 'white'}}>
             <CustomHeader title='Nuevo pedido' leftComponent={leftAux}/>
 
-            <ScrollView style={{marginTop: 10}}>
-                <Text style={{fontSize: 50}}>CARDS</Text>
-                <Text style={{fontSize: 50}}>CARDS</Text>
-                <Text style={{fontSize: 50}}>CARDS</Text>
-                <Text style={{fontSize: 50}}>CARDS</Text>
-                <Text style={{fontSize: 50}}>CARDS</Text>
-                <Text style={{fontSize: 50}}>CARDS</Text>
-                <Text style={{fontSize: 50}}>CARDS</Text>
-                <Text style={{fontSize: 50}}>CARDS</Text>
-                <Text style={{fontSize: 50}}>CARDS</Text>
-                <Text style={{fontSize: 50}}>CARDS</Text>
-            </ScrollView>
+            <FlatList
+                data={topRated}
+                style={{marginTop: 10}}
+                renderItem={ ({item}: any) => <NewOrderCard movie={item}/>}
+            />
             <View style={styles.scroll}/>
 
             <View style={styles.resumeContainer}>
@@ -59,34 +53,32 @@ export const NewOrderScreen = ({route, navigation}: Props) => {
                 <View style={{marginBottom: 15}}>
                     <View style={{flexDirection:'row', justifyContent:'space-between', marginVertical: 5}}>
                         <CustomText>Juli</CustomText>
-                        <CustomText>$1700</CustomText>
+                        <CustomText style={{fontWeight: 'bold'}}>$1700</CustomText>
                     </View>
                     <View style={{flexDirection:'row', justifyContent:'space-between', marginBottom: 5}}>
                         <CustomText>Mica</CustomText>
-                        <CustomText>$1300</CustomText>
+                        <CustomText style={{fontWeight: 'bold'}}>$1300</CustomText>
                     </View>
                 </View>
 
                 <View style={{backgroundColor: 'grey', width: '100%', height: 1, alignSelf: 'center'}}/>
                 <View style={{flexDirection:'row', justifyContent:'space-between', marginTop: 10}}>
                     <CustomText>Total a pagar</CustomText>
-                    <CustomText>$3000</CustomText>
+                    <CustomText style={{fontWeight: 'bold'}}>$3000</CustomText>
                 </View>
 
-                <View style={{width: 300, alignSelf: 'center', marginBottom: 20}}>
-                    <TouchableOpacity activeOpacity={0.7}>
-                        <View style={styles.buttonContainer}>
-                            <CustomText style={{fontSize: 18, color: 'white'}}>Confirmar pedido</CustomText>
-                        </View>
-                    </TouchableOpacity>
-                </View>
+                <TouchableOpacity activeOpacity={0.7} style={{width: 300, alignSelf: 'center', marginBottom: 20}}>
+                    <View style={styles.buttonContainer}>
+                        <CustomText style={{fontSize: 18, color: 'white'}}>Confirmar pedido</CustomText>
+                    </View>
+                </TouchableOpacity>
             </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    resumeContainer: {
+resumeContainer: {
         margin: 15
     },
     buttonContainer: {
@@ -94,7 +86,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginTop: 20,
         height: 50,
-        backgroundColor: '#C67C4E',
+        backgroundColor: '#BF7648',
         borderRadius: 12,
         shadowColor: "#000",
         shadowOffset: {

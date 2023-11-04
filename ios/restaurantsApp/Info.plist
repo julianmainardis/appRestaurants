@@ -51,10 +51,13 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-  
-  <key>UIAppFonts</key>
-  <array>
-    <string>Ionicons.ttf</string>
-  </array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>MaterialIcons.tff</string>
+		<string>Foundation.tff</string>
+		<string>FontAwesome.tff</string>
+		<string>Ionicons.ttf</string>
+		<string>MaterialCommunityIcons.ttf</string>
+	</array>
 </dict>
 </plist>

@@ -17,7 +17,7 @@ const {width: windowWitdth, height: windowHeight} =Dimensions.get('window');
 
 type NewOrderScreenNavigationProp = StackNavigationProp<RootStackParams, 'NewOrderScreen'>;
 
-export const HomeScreen = () => {
+export const KitchenHomeScreen = () => {
     
     //const { nowPlaying, popular, topRated, upcoming, isLoading } = useMovies();
     const {isLoading, products} = useProducts();
@@ -79,16 +79,20 @@ export const HomeScreen = () => {
 
     const rightAux = (
         <TouchableOpacity
-            onPress={() => navigation.navigate('NewOrderScreen')}
-            style={{
-                alignItems: 'flex-end',
-                justifyContent: 'center',
-                height: 50,
-                marginRight: 5
-            }}
+           testID="autoBack"
+           accessibilityLabel="autoBack"
+           style={{
+              alignItems: 'flex-start',
+              justifyContent: 'center',
+              height: 50,
+              marginLeft: 5
+           }}
+           onPress={() => {
+              navigation.goBack();
+           }}
         >
             <MaterialCommunityIcons
-                name='cart-outline'
+                name='arrow-left-thick'
                 size={40}
                 color='#A3A2A2'
             />
@@ -105,7 +109,7 @@ export const HomeScreen = () => {
 
     return (
         <View style={{backgroundColor: '#F7F7F7'}}>
-            <CustomHeader title='APP' rightComponent={rightAux} leftComponent={leftAux}/>
+            <CustomHeader title='KITCHEN' rightComponent={rightAux} leftComponent={leftAux}/>
 
             <View style={styles.searcher}>
                 <View style={{alignSelf: 'center', justifyContent: 'flex-start', marginLeft: 20}}>
@@ -143,27 +147,6 @@ export const HomeScreen = () => {
                     paddingRight: windowWitdth / 2,
                 }}
             />
-
-            <View style={{flexDirection: 'row', justifyContent: 'space-around', marginTop: 10}}>
-                <TouchableOpacity 
-                    style={{borderWidth: 1, padding: 5}}
-                    onPress={() => navigation.navigate('LoginScreen')}
-                >
-                    <Text>LOGIN</Text>
-                </TouchableOpacity>
-                <TouchableOpacity 
-                    style={{borderWidth: 1, padding: 5}}
-                    onPress={() => navigation.navigate('KitchenHomeScreen')} 
-                >
-                    <Text>COCINA</Text>
-                </TouchableOpacity>
-                <TouchableOpacity 
-                    style={{borderWidth: 1, padding: 5}}
-                    onPress={() => navigation.navigate('ManagerHomeScreen')}    
-                >
-                    <Text>CAJERO</Text>
-                </TouchableOpacity>
-            </View>
 
             <FlatList
                 data={filteredProducts}

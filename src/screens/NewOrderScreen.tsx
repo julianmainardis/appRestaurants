@@ -8,6 +8,7 @@ import CustomHeader from '../components/CustomHeader';
 import { NewOrderCard } from '../components/NewOrderCard';
 import { useMovies } from '../hooks/useMovies';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const screenHeight = Dimensions.get('screen').height;
 
@@ -31,8 +32,11 @@ export const NewOrderScreen = ({route, navigation}: Props) => {
               navigation.goBack();
            }}
         >
-           {/* <FontAwesome5Icon name="chevron-left" color={'#A3A2A2'} size={26}/> */}
-           <Text style={{color:'#A3A2A2'}}>back</Text>
+           <MaterialCommunityIcons
+                name='arrow-left-thick'
+                size={40}
+                color='#A3A2A2'
+            />
         </TouchableOpacity>
      );
     

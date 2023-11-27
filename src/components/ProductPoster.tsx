@@ -5,16 +5,17 @@ import { Image, StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Movie } from '../interfaces/movieInterface';
 import { RootStackParams } from '../navigation/Navigation';
+import { Product } from '../interfaces/productsInterface';
 
 interface Props {
-    movie: Movie;
+    product: Product;
     height?: number;
     width?: number;
 }
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParams, 'HomeScreen'>;
 
-export const MoviePoster = ({movie, height = 120}: Props) => {
+export const ProductPoster = ({product, height = 120}: Props) => {
     
     const uri = `https://picsum.photos/200/300`;
     const navigation = useNavigation<HomeScreenNavigationProp>();
@@ -33,7 +34,7 @@ export const MoviePoster = ({movie, height = 120}: Props) => {
 
     return (
         <TouchableOpacity
-            onPress={() => navigation.navigate('DetailScreen', movie)}
+            onPress={() => navigation.navigate('DetailScreen', product)}
             activeOpacity={0.8}
             style={{
                 height,
@@ -43,10 +44,11 @@ export const MoviePoster = ({movie, height = 120}: Props) => {
             <View style={styles.container}>
                 <View style={{flex:1, flexDirection: 'row'}}>
                     <View style={{marginLeft: 10, marginTop: 4, marginRight: 5, marginBottom: 5}}>
-                        <Text numberOfLines={1} style={{fontSize: 18, fontWeight: 'bold', marginVertical: 5}}>{movie.original_title}</Text>
-                        <Text numberOfLines={2} ellipsizeMode="tail" style={{opacity: 0.7}}>{movie.overview}</Text>
+                        <Text numberOfLines={1} style={{fontSize: 18, fontWeight: 'bold', marginVertical: 5}}>{product.name}</Text>
+                        <Text numberOfLines={2} ellipsizeMode="tail" style={{opacity: 0.7}}>{product.description}</Text>
                         <View style={{marginVertical: 5, marginRight: 5}}>
-                            <Text>$ {movie.id}</Text>
+                            {/* <Text>$ {product.size.length > 1 ? product.size[1].price : product.size[0].price}</Text> */}
+                            <Text>$ {product.size[0].price}</Text>
                         </View>
                     </View>
                 </View>

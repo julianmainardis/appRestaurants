@@ -1,7 +1,7 @@
 import React from 'react'
 import { Movie } from '../interfaces/movieInterface';
 import { View, Text, FlatList } from 'react-native';
-import { MoviePoster } from './MoviePoster';
+import { ProductPoster } from './ProductPoster';
 
 
 interface Props {
@@ -18,7 +18,7 @@ export const HorizontalSlider = ({title, movies}: Props) => {
             <FlatList
                 data={movies}
                 renderItem={ ({item}: any) => (
-                    <MoviePoster movie={item} width={140} height={200}/>
+                    <ProductPoster product={item} width={140} height={200}/>
                 )}
                 keyExtractor={(item) => item.id.toString()}
                 horizontal={true}

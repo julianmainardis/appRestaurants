@@ -7,6 +7,10 @@ import { useMovieDetails } from '../hooks/useMovieDetails';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CustomHeader from '../components/CustomHeader';
 import { SuccessModal } from '../components/SuccessModal';
+import { color } from 'react-native-elements/dist/helpers';
+import { useProducts } from '../hooks/useProducts';
+import { useCategories } from '../hooks/useCategories';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const screenHeight = Dimensions.get('screen').height;
 
@@ -14,11 +18,13 @@ interface Props extends StackScreenProps<RootStackParams, 'DetailScreen'>{};
 
 export const DetailScreen = ({route, navigation}: Props) => {
     
-    const movie = route.params;
+    const product = route.params;
     const uri = `https://picsum.photos/200/300`;
 
-    const { isLoading, cast, movieFull } = useMovieDetails(movie.id);
+    const { isLoading, products } = useProducts();
+    const {categories} = useCategories();
     const [modalVisible, setModalVisible] = useState(false);    
+    const [sizeBig, setSizeBig] = useState(false);    
 
     const leftAux = (
         <TouchableOpacity
@@ -34,7 +40,11 @@ export const DetailScreen = ({route, navigation}: Props) => {
               navigation.goBack();
            }}
         >
-            <Icon name='star' color="#A3A2A2" size={20}/>
+            <MaterialCommunityIcons
+                name='arrow-left-thick'
+                size={40}
+                color='#A3A2A2'
+            />
         </TouchableOpacity>
     );
 
@@ -52,7 +62,7 @@ export const DetailScreen = ({route, navigation}: Props) => {
             //   navigation.goBack();
            }}
         >
-            <Icon name='star-outline' color="#A3A2A2" size={20}/>
+            <Icon name='star-outline' color="#A3A2A2" size={40}/>
         </TouchableOpacity>
     );
     
@@ -71,16 +81,19 @@ export const DetailScreen = ({route, navigation}: Props) => {
                 </View>
 
                 <View style={styles.marginContainer}>
-                    <Text style={styles.title}>{movie.title}</Text>
-                    <Text style={styles.subTitle}>{movie.original_title}</Text>
+                    <Text style={styles.title}>{product.name}</Text>
+                    <Text style={styles.subTitle}>{product.shortDescription}</Text>
                 </View>
+
+                <View style={{backgroundColor: '#D8D8D8', width: '100%', height: 1, alignSelf: 'center', marginTop: 20}}/>
+
                 {
                     isLoading
                         ? <ActivityIndicator size={35} color="grey" style={{marginTop: 20}}/>
                         // : <MovieDetails movieFull={movieFull!} cast={cast}/>
                         : (
                         <View style={{marginHorizontal: 20}}>
-                            <View style={{flexDirection: 'row'}}>
+                            {/* <View style={{flexDirection: 'row'}}> */}
                                 {/* <Icon
                                     name='star-outline'
                                     color="grey"
@@ -90,20 +103,48 @@ export const DetailScreen = ({route, navigation}: Props) => {
                                 {/* <Text style={{marginLeft: 5}}>
                                     - {movieFull.genres.map(g => g.name).join(', ')}
                                 </Text> */}
-                            </View>
-
-                            <View style={{backgroundColor: '#D8D8D8', width: '100%', height: 1, alignSelf: 'center', marginTop: 20}}/>
+                            {/* </View> */}
 
                             <Text style={{fontSize: 20, marginTop: 20, fontWeight: 'bold'}}>
                                 Descripcion
                             </Text>
-
                             <Text style={{fontSize: 16, marginTop: 10}}>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur est quod culpa laboriosam officia harum debitis quaerat, qui tenetur natus, quae repellendus mollitia ea, porro ut blanditiis nesciunt tempora consequatur.
+                                {product.description}
                             </Text>
+
+                            <Text style={{fontSize: 20, marginTop: 20, fontWeight: 'bold'}}>
+                                Tamaño
+                            </Text>
+                            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', marginTop: 15}}>
+                                <TouchableOpacity style={{flex: 1}} onPress={() => setSizeBig(false)}>
+                                    <View
+                                        style={{
+                                            ...styles.sizeButton,
+                                            borderColor: !sizeBig ? '#BF7648' : '#D0D0D0',
+                                            backgroundColor: !sizeBig ? '#F9EAE2' : '#F7F7F7'
+                                        }}
+                                    >
+                                        <Text style={{fontSize: 20, color: !sizeBig ? '#BF7648' : 'black'}}>{product.size[0].size}</Text>
+                                    </View>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity style={{flex: 1}} onPress={() => setSizeBig(true)}>
+                                    <View
+                                        style={{
+                                            ...styles.sizeButton,
+                                            borderColor: sizeBig ? '#BF7648' : '#D0D0D0',
+                                            backgroundColor: sizeBig ? '#F9EAE2' : '#F7F7F7'
+                                        }}
+                                    >    
+                                        <Text style={{fontSize: 20, color: sizeBig ? '#BF7648' : 'black'}}>{product.size[1].size}</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
                         </View>
                     )
                 }
+
+
 
                 {/* <TouchableOpacity
                     style={styles.backButton}
@@ -119,7 +160,7 @@ export const DetailScreen = ({route, navigation}: Props) => {
                 <View style={{justifyContent:'space-around', flexDirection: 'row', marginVertical: 30, alignItems: 'flex-end'}}>
                     <View style={{marginLeft: 10}}>
                         <Text style={{fontSize: 20, marginLeft: 5}}>Precio</Text>
-                        <Text style={{fontSize: 25, marginTop: 10, color: '#BF7648'}}>$1700</Text>
+                        <Text style={{fontSize: 25, marginTop: 10, color: '#BF7648'}}>${sizeBig ? product.size[1].price : product.size[0].price}</Text>
                     </View>
                     <TouchableOpacity activeOpacity={0.7} onPress={() => setModalVisible(true)}>
                         <View style={styles.buttonContainer}>
@@ -198,4 +239,12 @@ const styles = StyleSheet.create({
         shadowRadius: 23,
         elevation: 3,
     },
+    sizeButton: {
+        borderRadius: 20,
+        borderWidth: 1,
+        marginHorizontal: 10,
+        height: 60,
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
 });

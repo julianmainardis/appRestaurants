@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { FlatList, TextInput } from 'react-native-gesture-handler';
 import CustomHeader from '../components/CustomHeader';
 import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
+import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack';
 import { RootStackParams } from '../navigation/Navigation';
 import { useProducts } from '../hooks/useProducts';
 import { useCategories } from '../hooks/useCategories';
@@ -15,15 +15,13 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 const {width: windowWitdth, height: windowHeight} =Dimensions.get('window');
 
-type NewOrderScreenNavigationProp = StackNavigationProp<RootStackParams, 'NewOrderScreen'>;
+interface Props extends StackScreenProps<RootStackParams, 'DetailScreen'>{};
 
-export const ManagerHomeScreen = () => {
+export const ManagerHomeScreen = ({route, navigation}: Props) => {
     
-    //const { nowPlaying, popular, topRated, upcoming, isLoading } = useMovies();
     const {isLoading, products} = useProducts();
     const {categories} = useCategories();
     const { top } = useSafeAreaInsets();
-    const navigation = useNavigation<NewOrderScreenNavigationProp>();
     const [selectedItem, setSelectedItem] = useState(null);
     const flatListRef = useRef(null);
     const [searchTerm, setSearchTerm] = useState('');

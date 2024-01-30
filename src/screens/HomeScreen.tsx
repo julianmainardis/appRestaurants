@@ -70,7 +70,7 @@ export const HomeScreen = () => {
             }}
         >
             <MaterialCommunityIcons
-                name='account-circle'
+                name='calendar-remove'
                 size={50}
                 color='#A3A2A2'
             />
@@ -88,7 +88,7 @@ export const HomeScreen = () => {
             }}
         >
             <MaterialCommunityIcons
-                name='cart-outline'
+                name='camera'
                 size={40}
                 color='#A3A2A2'
             />
@@ -110,7 +110,7 @@ export const HomeScreen = () => {
             <View style={styles.searcher}>
                 <View style={{alignSelf: 'center', justifyContent: 'flex-start', marginLeft: 20}}>
                     <MaterialCommunityIcons
-                        name='magnify'
+                        name='camera'
                         size={40}
                         color='#F7F7F7'
                     />
@@ -144,7 +144,7 @@ export const HomeScreen = () => {
                 }}
             />
 
-            <View style={{flexDirection: 'row', justifyContent: 'space-around', marginTop: 10}}>
+            {/* <View style={{flexDirection: 'row', justifyContent: 'space-around', marginTop: 10}}>
                 <TouchableOpacity 
                     style={{borderWidth: 1, padding: 5}}
                     onPress={() => navigation.navigate('LoginScreen')}
@@ -163,7 +163,7 @@ export const HomeScreen = () => {
                 >
                     <Text>CAJERO</Text>
                 </TouchableOpacity>
-            </View>
+            </View> */}
 
             <FlatList
                 data={filteredProducts}

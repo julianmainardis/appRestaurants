@@ -9,6 +9,8 @@ import { NewOrderCard } from '../components/NewOrderCard';
 import { useMovies } from '../hooks/useMovies';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useProducts } from '../hooks/useProducts';
+import { ProductPoster } from '../components/ProductPoster';
 
 const screenHeight = Dimensions.get('screen').height;
 
@@ -16,7 +18,7 @@ interface Props extends StackScreenProps<RootStackParams, 'NewOrderScreen'>{};
 
 export const NewOrderScreen = ({route, navigation}: Props) => {
     
-    const { topRated } = useMovies();
+    const { products } = useProducts();
 
     const leftAux = (
         <TouchableOpacity
@@ -45,10 +47,13 @@ export const NewOrderScreen = ({route, navigation}: Props) => {
             <CustomHeader title='Nuevo pedido' leftComponent={leftAux}/>
 
             <FlatList
-                data={topRated}
+                data={products.slice(0,2)}
                 style={{marginTop: 10}}
-                renderItem={ ({item}: any) => <NewOrderCard movie={item}/>}
+                renderItem={ ({item}: any) => <ProductPoster product={item}/>}
             />
+            <View>
+
+            </View>
             <View style={styles.scroll}/>
 
             <View style={styles.resumeContainer}>
@@ -61,14 +66,14 @@ export const NewOrderScreen = ({route, navigation}: Props) => {
                     </View>
                     <View style={{flexDirection:'row', justifyContent:'space-between', marginBottom: 5}}>
                         <CustomText>Mica</CustomText>
-                        <CustomText style={{fontWeight: 'bold'}}>$1300</CustomText>
+                        <CustomText style={{fontWeight: 'bold'}}>$2500</CustomText>
                     </View>
                 </View>
 
                 <View style={{backgroundColor: 'grey', width: '100%', height: 1, alignSelf: 'center'}}/>
                 <View style={{flexDirection:'row', justifyContent:'space-between', marginTop: 10}}>
                     <CustomText>Total a pagar</CustomText>
-                    <CustomText style={{fontWeight: 'bold'}}>$3000</CustomText>
+                    <CustomText style={{fontWeight: 'bold'}}>$4200</CustomText>
                 </View>
 
                 <TouchableOpacity activeOpacity={0.7} style={{width: 300, alignSelf: 'center', marginBottom: 20}}>
@@ -83,7 +88,7 @@ export const NewOrderScreen = ({route, navigation}: Props) => {
 
 const styles = StyleSheet.create({
 resumeContainer: {
-        margin: 15
+        margin: 15,
     },
     buttonContainer: {
         alignItems: 'center',

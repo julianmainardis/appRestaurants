@@ -12,6 +12,8 @@ import { RootStackParams } from '../navigation/Navigation';
 import { useProducts } from '../hooks/useProducts';
 import { useCategories } from '../hooks/useCategories';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 
 const {width: windowWitdth, height: windowHeight} =Dimensions.get('window');
 
@@ -87,9 +89,9 @@ export const HomeScreen = () => {
                 marginRight: 5
             }}
         >
-            <MaterialCommunityIcons
-                name='camera'
-                size={40}
+            <FontAwesome5
+                name='shopping-cart'
+                size={35}
                 color='#A3A2A2'
             />
         </TouchableOpacity>
@@ -109,8 +111,8 @@ export const HomeScreen = () => {
 
             <View style={styles.searcher}>
                 <View style={{alignSelf: 'center', justifyContent: 'flex-start', marginLeft: 20}}>
-                    <MaterialCommunityIcons
-                        name='camera'
+                    <AntDesign
+                        name='search1'
                         size={40}
                         color='#F7F7F7'
                     />
@@ -122,11 +124,6 @@ export const HomeScreen = () => {
                         onChangeText={onSearchTermChange}
                     />
                 </View>
-                {/* <View style={{height: 40, width: 50, backgroundColor: '#BF7648', alignSelf: 'center', borderRadius: 15, justifyContent: 'flex-end'}}>
-                    <TouchableOpacity>
-
-                    </TouchableOpacity>
-                </View> */}
             </View>
 
             <FlatList 
@@ -144,7 +141,7 @@ export const HomeScreen = () => {
                 }}
             />
 
-            {/* <View style={{flexDirection: 'row', justifyContent: 'space-around', marginTop: 10}}>
+            <View style={{flexDirection: 'row', justifyContent: 'space-around', marginTop: 10}}>
                 <TouchableOpacity 
                     style={{borderWidth: 1, padding: 5}}
                     onPress={() => navigation.navigate('LoginScreen')}
@@ -163,7 +160,7 @@ export const HomeScreen = () => {
                 >
                     <Text>CAJERO</Text>
                 </TouchableOpacity>
-            </View> */}
+            </View>
 
             <FlatList
                 data={filteredProducts}

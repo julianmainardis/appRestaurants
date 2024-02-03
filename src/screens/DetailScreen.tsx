@@ -3,13 +3,11 @@ import React, { useState } from 'react'
 import { Image, StyleSheet, Text, View, Dimensions, ActivityIndicator, TouchableOpacity, Modal, Alert } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { RootStackParams } from '../navigation/Navigation';
-import { useMovieDetails } from '../hooks/useMovieDetails';
-import Icon from 'react-native-vector-icons/Ionicons';
 import CustomHeader from '../components/CustomHeader';
 import { SuccessModal } from '../components/SuccessModal';
-import { color } from 'react-native-elements/dist/helpers';
 import { useProducts } from '../hooks/useProducts';
 import { useCategories } from '../hooks/useCategories';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const screenHeight = Dimensions.get('screen').height;
@@ -22,9 +20,10 @@ export const DetailScreen = ({route, navigation}: Props) => {
     const uri = `https://picsum.photos/200/300`;
 
     const { isLoading, products } = useProducts();
+    const [heartClicked, setHeartClicked] = useState(false);
     const {categories} = useCategories();
     const [modalVisible, setModalVisible] = useState(false);    
-    const [sizeBig, setSizeBig] = useState(false);    
+    const [sizeBig, setSizeBig] = useState(false);
 
     const leftAux = (
         <TouchableOpacity
@@ -50,21 +49,27 @@ export const DetailScreen = ({route, navigation}: Props) => {
 
     const rightAux = (
         <TouchableOpacity
-           testID="autoBack"
-           accessibilityLabel="autoBack"
-           style={{
-              alignItems: 'flex-end',
-              justifyContent: 'center',
-              height: 50,
-              marginRight: 5
-           }}
-           onPress={() => {
-            //   navigation.goBack();
-           }}
+            testID="autoBack"
+            accessibilityLabel="autoBack"
+            style={{
+                alignItems: 'flex-end',
+                justifyContent: 'center',
+                height: 50,
+                marginRight: 5
+            }}
+            onPress={() => {
+                setHeartClicked((prevHeartClicked) => !prevHeartClicked);
+            }}
         >
-            <Icon name='star-outline' color="#A3A2A2" size={40}/>
+            {
+                heartClicked 
+                ? ( <FontAwesome name='heart' color="#A3A2A2" size={32}/> )
+                : ( <FontAwesome name='heart-o' color="#A3A2A2" size={32}/> )
+            }
         </TouchableOpacity>
     );
+
+
     
     return (
         <>
@@ -90,20 +95,8 @@ export const DetailScreen = ({route, navigation}: Props) => {
                 {
                     isLoading
                         ? <ActivityIndicator size={35} color="grey" style={{marginTop: 20}}/>
-                        // : <MovieDetails movieFull={movieFull!} cast={cast}/>
                         : (
                         <View style={{marginHorizontal: 20}}>
-                            {/* <View style={{flexDirection: 'row'}}> */}
-                                {/* <Icon
-                                    name='star-outline'
-                                    color="grey"
-                                    size={16}
-                                />
-                                <Text style={{marginLeft: 5}}>ddd</Text> */}
-                                {/* <Text style={{marginLeft: 5}}>
-                                    - {movieFull.genres.map(g => g.name).join(', ')}
-                                </Text> */}
-                            {/* </View> */}
 
                             <Text style={{fontSize: 20, marginTop: 20, fontWeight: 'bold'}}>
                                 Descripcion
@@ -143,19 +136,6 @@ export const DetailScreen = ({route, navigation}: Props) => {
                         </View>
                     )
                 }
-
-
-
-                {/* <TouchableOpacity
-                    style={styles.backButton}
-                    onPress={() => navigation.pop()}
-                >
-                    <Icon
-                        color="white"
-                        name='arrow-back-outline'
-                        size={60}
-                    />
-                </TouchableOpacity>  */}
 
                 <View style={{justifyContent:'space-around', flexDirection: 'row', marginVertical: 30, alignItems: 'flex-end'}}>
                     <View style={{marginLeft: 10}}>
